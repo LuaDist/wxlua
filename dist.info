@@ -10,10 +10,9 @@ scripting language.]]
 author = "Francesco Montorsi, John Labenski, Paul Winwood, Ray Gilbert, Klaas Holwerda"
 license = "wxWindows Library Licence, Version 3"
 url = "http://wxlua.sourceforge.net"
-maintainer = "Peter Kapec"
+maintainer = "Peter Kapec, Peter Drahos"
 
 depends = {
 	"lua ~> 5.1",
-	"wxWidgets >=2.8.4 ",
---~ 	"wxStEdit >= 1.2.4 "
+	"wxwidgets ~> 2.8",
 }
