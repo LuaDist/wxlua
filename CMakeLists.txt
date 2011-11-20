@@ -22,6 +22,7 @@ IF (MINGW AND NOT wxWidgets_FOUND)
 		${wxWidgets_gl_LIBRARY} 
 		${wxWidgets_stc_LIBRARY} 
 		)
+	SET ( CMAKE_CXX_FLAGS "-fpermissive" )
 ENDIF()
 INCLUDE_DIRECTORIES( ${wxWidgets_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} "modules" "modules/wxbind/setup" )
 
