@@ -1,22 +1,23 @@
-# Copyright (C) 2007-2011 LuaDist.
+# Copyright (C) 2007-2012 LuaDist.
 # Created by Peter Kapec. Peter Drahos
 # Redistribution and use of this file is allowed according to the terms of the MIT license.
 # For details see the COPYRIGHT file distributed with LuaDist.
 # Please note that the package source code is licensed under its own license.
 
 PROJECT(wxlua C CXX)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-INCLUDE(dist.cmake)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+INCLUDE( cmake/dist.cmake )
+INCLUDE ( lua )
 
 FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(wxWidgets COMPONENTS base core gl html media net richtext stc xml xrc adv aui)
 
-# Find wx on mingw, this assumes msw built monolithic libraries + gl and stc
-IF (MINGW AND NOT wxWidgets_FOUND)
-	FIND_PATH(wxWidgets_INCLUDE_DIR NAMES wx/wx.h wx.h)
-	FIND_LIBRARY(wxWidgets_LIBRARY NAMES wxmsw28)
-	FIND_LIBRARY(wxWidgets_gl_LIBRARY NAMES wxmsw28_gl)
-	FIND_LIBRARY(wxWidgets_stc_LIBRARY NAMES wxmsw28_stc)
+# Try direct approach if not found, this assumes monolithic libraries + gl and stc built from LuaDist/wxwidgets
+IF ( NOT wxWidgets_FOUND)
+	FIND_PATH(wxWidgets_INCLUDE_DIR NAMES wx/wx.h )
+	FIND_LIBRARY(wxWidgets_LIBRARY NAMES wx wxmsw28)
+	FIND_LIBRARY(wxWidgets_gl_LIBRARY NAMES wx_gl wxmsw28_gl)
+	FIND_LIBRARY(wxWidgets_stc_LIBRARY NAMES wx_stc wxmsw28_stc)
 	SET (wxWidgets_LIBRARIES
 		${wxWidgets_LIBRARY}
 		${wxWidgets_gl_LIBRARY} 
@@ -24,7 +25,7 @@ IF (MINGW AND NOT wxWidgets_FOUND)
 		)
 	SET ( CMAKE_CXX_FLAGS "-fpermissive" )
 ENDIF()
-INCLUDE_DIRECTORIES( ${wxWidgets_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} "modules" "modules/wxbind/setup" )
+INCLUDE_DIRECTORIES( ${wxWidgets_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} modules modules/wxbind/setup )
 
 # Collect sources
 FILE ( GLOB WXLUA_LIB_SRC modules/wxlua/src/wx*.cpp )
@@ -41,9 +42,9 @@ ENDIF (WIN32)
 
 # wxLua shared Library
 SET( WXLUA_ALL_SRC ${WXLUA_LIB_SRC}  ${WXLUA_DEBUG_SRC} ${WXLUA_BIND_SRC} ${WXLUA_SOCKET_SRC}  )
-ADD_LIBRARY ( libwxlua SHARED ${WXLUA_ALL_SRC})
-TARGET_LINK_LIBRARIES( libwxlua ${wxWidgets_LIBRARIES} ${LUA_LIBRARY} ${LIB_SOCKET} )
-SET_TARGET_PROPERTIES( libwxlua PROPERTIES OUTPUT_NAME "wxlua" )
+ADD_LIBRARY ( libwxlua ${WXLUA_ALL_SRC})
+TARGET_LINK_LIBRARIES( libwxlua ${wxWidgets_LIBRARY} ${wxWidgets_stc_LIBRARY} ${wxWidgets_gl_LIBRARY} ${LUA_LIBRARY} ${LIB_SOCKET} )
+SET_TARGET_PROPERTIES( libwxlua PROPERTIES OUTPUT_NAME wxlua )
 
 # wxLua application
 FILE ( GLOB WXLUA_SRC apps/wxlua/src/*.cpp )
@@ -62,10 +63,10 @@ TARGET_LINK_LIBRARIES( wxlua libwxlua )
 
 # wx module
 
-INSTALL_LUA_MODULE( wx modules/luamodule/src/luamodule.cpp LINK libwxlua )
+install_lua_module ( wx modules/luamodule/src/luamodule.cpp LINK libwxlua )
 
 # Install all files and documentation
-INSTALL (TARGETS libwxlua wxlua RUNTIME DESTINATION ${INSTALL_BIN} LIBRARY DESTINATION ${INSTALL_LIB} ARCHIVE DESTINATION ${INSTALL_LIB})
-INSTALL (DIRECTORY samples/ DESTINATION ${INSTALL_EXAMPLE})
-#INSTALL (FILES apps/wxluafreeze/src/wxluafreeze.lua util/bin2c/bin2c.lua util/wrapmodule/wrapmodule.wx.lua DESTINATION ${INSTALL_FOO})
-#INSTALL (DIRECTORY docs/ DESTINATION ${INSTALL_DOC} PATTERN "doxygen.cfg" EXCLUDE  PATTERN "doxygen/*" EXCLUDE)
+install_executable ( wxlua )
+install_library ( libwxlua )
+install_example ( samples/ )
+install_doc ( docs/ )
