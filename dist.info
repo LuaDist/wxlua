@@ -1,0 +1,90 @@
+type = "x86"
+arch = "Windows"
+author = "Francesco Montorsi, John Labenski, Paul Winwood, Ray Gilbert, Klaas Holwerda"
+depends = {
+[[lua ~> 5.1]],
+[[wxwidgets ~> 2.8]],
+}
+
+desc = "wxLua is a lua scripting language wrapper around the wxWidgets cross-platform GUI library. It consists of an executable for running standalone wxLua scripts and a library for extending C++ programs with a fast, small, fully embeddable scripting language."
+version = "2.8.10.0"
+maintainer = "Peter Kapec, Peter Drahos"
+files = {
+Runtime = {
+[[lib\lua\wx.dll]],
+[[bin\wxlua.exe]],
+[[bin\libwxlua.dll]],
+}
+,
+Documentation = {
+[[share\wxlua\doc\\binding.html]],
+[[share\wxlua\doc\\changelog.txt]],
+[[share\wxlua\doc\\dirs.txt]],
+[[share\wxlua\doc\\doxygen\.cvsignore]],
+[[share\wxlua\doc\\doxygen\readme.txt]],
+[[share\wxlua\doc\\doxygen.cfg]],
+[[share\wxlua\doc\\FAQ.html]],
+[[share\wxlua\doc\\install.html]],
+[[share\wxlua\doc\\licence.txt]],
+[[share\wxlua\doc\\readme.txt]],
+[[share\wxlua\doc\\wxlua.html]],
+[[share\wxlua\doc\\wxluaref.html]],
+}
+,
+Library = {
+[[lib\libwxlua.dll.a]],
+}
+,
+Example = {
+[[share\wxlua\example\\auidemo.wx.lua]],
+[[share\wxlua\example\\bindings.wx.lua]],
+[[share\wxlua\example\\calculator.wx.lua]],
+[[share\wxlua\example\\calculator.xrc]],
+[[share\wxlua\example\\choices.wx.lua]],
+[[share\wxlua\example\\controls.wx.lua]],
+[[share\wxlua\example\\coroutine.wx.lua]],
+[[share\wxlua\example\\dialog.wx.lua]],
+[[share\wxlua\example\\editor.wx.lua]],
+[[share\wxlua\example\\grid.wx.lua]],
+[[share\wxlua\example\\gridtable.wx.lua]],
+[[share\wxlua\example\\htmlwin.wx.lua]],
+[[share\wxlua\example\\image\cmyk.jpg]],
+[[share\wxlua\example\\image\horse.bmp]],
+[[share\wxlua\example\\image\horse.cur]],
+[[share\wxlua\example\\image\horse.gif]],
+[[share\wxlua\example\\image\horse.ico]],
+[[share\wxlua\example\\image\horse.jpg]],
+[[share\wxlua\example\\image\horse.pcx]],
+[[share\wxlua\example\\image\horse.png]],
+[[share\wxlua\example\\image\horse.pnm]],
+[[share\wxlua\example\\image\horse.tga]],
+[[share\wxlua\example\\image\horse.tif]],
+[[share\wxlua\example\\image\horse.xpm]],
+[[share\wxlua\example\\image\horse3.ani]],
+[[share\wxlua\example\\image\horse_ag.pnm]],
+[[share\wxlua\example\\image\horse_rg.pnm]],
+[[share\wxlua\example\\image\image.wx.lua]],
+[[share\wxlua\example\\image\smile.xbm]],
+[[share\wxlua\example\\image\smile.xpm]],
+[[share\wxlua\example\\image\toucan.png]],
+[[share\wxlua\example\\luamodule.wx.lua]],
+[[share\wxlua\example\\mdi.wx.lua]],
+[[share\wxlua\example\\media.wx.lua]],
+[[share\wxlua\example\\minimal.wx.lua]],
+[[share\wxlua\example\\picker.wx.lua]],
+[[share\wxlua\example\\printing.wx.lua]],
+[[share\wxlua\example\\scribble.wx.lua]],
+[[share\wxlua\example\\settings.wx.lua]],
+[[share\wxlua\example\\sizer.wx.lua]],
+[[share\wxlua\example\\tree.wx.lua]],
+[[share\wxlua\example\\unittest.wx.lua]],
+[[share\wxlua\example\\validator.wx.lua]],
+[[share\wxlua\example\\veryminimal.wx.lua]],
+[[share\wxlua\example\\wxluasudoku.wx.lua]],
+}
+,
+}
+
+license = "wxWindows Library Licence, Version 3"
+name = "wxlua"
+url = "http://wxlua.sourceforge.net"
