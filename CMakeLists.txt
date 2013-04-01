@@ -23,7 +23,13 @@ IF ( NOT wxWidgets_FOUND)
 		${wxWidgets_gl_LIBRARY} 
 		${wxWidgets_stc_LIBRARY} 
 		)
-	SET ( CMAKE_CXX_FLAGS "-fpermissive" )
+	MESSAGE ( STATUS "Found wxWidgets INCLUDE ${wxWidgets_INCLUDE_DIR}" )
+	MESSAGE ( STATUS "Found wxWidgets LIBRARY ${wxWidgets_LIBRARY}" )
+	MESSAGE ( STATUS "Found wxWidgets GL LIBRARY ${wxWidgets_gl_LIBRARY}" )
+	MESSAGE ( STATUS "Found wxWidgets STC LIBRARY ${wxWidgets_stc_LIBRARY}" )
+	IF (NOT MSVC)
+		SET ( CMAKE_CXX_FLAGS "-fpermissive" )
+	ENDIF ()
 ENDIF()
 INCLUDE_DIRECTORIES( ${wxWidgets_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} modules modules/wxbind/setup )
 
